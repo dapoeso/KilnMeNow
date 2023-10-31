@@ -5,6 +5,7 @@ import Login from "./screens/Login";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { FIREBASE_AUTH } from "./FirebaseConfig";
+import Router from "./navigation/Router";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,14 +19,6 @@ export default function App() {
     });
   }, []);
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        {user ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
-        ) : (
-          <Stack.Screen name="Login" component={Login} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Router user={user} />
   );
 }

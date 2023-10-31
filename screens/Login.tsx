@@ -26,9 +26,7 @@ const Login = () => {
   const signIn = async () => {
     setLoading(true);
     try {
-      console.log(auth, email, password);
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
       alert("Sign in Successful!");
     } catch (error: any) {
       console.log(error);
@@ -46,7 +44,6 @@ const Login = () => {
         email,
         password
       );
-      console.log(response);
       alert("Successfully Registered");
     } catch (error: any) {
       console.log(error);

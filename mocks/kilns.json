@@ -1,0 +1,16 @@
+[
+    {
+        "imageSource": "https://media.istockphoto.com/id/625372336/photo/pottery-making-kiln.jpg?s=2048x2048&w=is&k=20&c=2kI54iQ1L5uuLFBq_yAXsKyjKOhadgSlPjsAUPpAa3Y=",
+        "distance": "5 miles away",
+        "price": "$24.99",
+        "turnaround": "4-6 weeks",
+        "rating": "4.5/5"
+    },
+    {
+        "imageSource": "https://media.istockphoto.com/id/1319479776/photo/female-potter-in-gloves-using-electric-pottery-kiln-in-workshop.jpg?s=2048x2048&w=is&k=20&c=XMHgeBE7_LR32Y_QYvXC7kfHF3sfoUivjfre4AjVu4A=",
+        "distance": "6 miles away",
+        "price": "$20.99",
+        "turnaround": "4-6 weeks",
+        "rating": "4.7/5"
+    }
+]
