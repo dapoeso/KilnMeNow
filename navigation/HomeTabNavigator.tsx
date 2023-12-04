@@ -5,10 +5,15 @@ import Profile from "../screens/Profile";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ResultsTabNavigator from "./ResultsTabNavigator";
 import Login from "../screens/Login";
+import KilnDetails from "../screens/KilnDetails";
+import BookingsScreen from "../screens/BookingsScreen";
+import SavedItemsScreen from "../screens/SavedItemsScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const Tab = createBottomTabNavigator();
 
-function HomeTabNavigator({user}) {
+function HomeTabNavigator({ user }) {
+    console.log("HomeTabNavigator user", user);
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -22,7 +27,7 @@ function HomeTabNavigator({user}) {
       />
       <Tab.Screen
         name="Saved"
-        component={HomeScreen}
+        component={SavedItemsScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="heart" color={color} size={26} />
@@ -31,16 +36,16 @@ function HomeTabNavigator({user}) {
       />
       <Tab.Screen
         name="Bookings"
-        component={HomeScreen}
+        component={BookingsScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="fire" color={color} size={26} />
           ),
         }}
       />
-            <Tab.Screen
+      <Tab.Screen
         name="Messages"
-        component={HomeScreen}
+        component={ChatScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="chat" color={color} size={26} />
@@ -49,24 +54,25 @@ function HomeTabNavigator({user}) {
       />
       {user ? (
         <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
-        }}
-      />
+          name="Profile"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
+            ),
+          }}
+        >
+            {(props) => <Profile {...props} login={user} />}
+        </Tab.Screen>
       ) : (
         <Tab.Screen
-        name="Login"
-        component={Login}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
-        }}
-      />
+          name="Login"
+          component={Login}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
+            ),
+          }}
+        />
       )}
     </Tab.Navigator>
   );

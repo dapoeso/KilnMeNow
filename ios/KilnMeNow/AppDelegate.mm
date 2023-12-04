@@ -9,7 +9,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"API_KEY"];
+  [GMSServices provideAPIKey:@"AIzaSyDM2pDZtle3A5TLLwt9KoMnkZFvyZQDgc8"];
   self.moduleName = @"main";
 
   // You can add your custom initial props in the dictionary below.

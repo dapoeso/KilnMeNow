@@ -3,12 +3,10 @@ import { Text, Image, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function KilnCard({ id, title, imageSource, location, price }) {
-    console.log(imageSource);
     const navigation = useNavigation();
 
     const handlePress = () => {
-
-      // navigation.navigate('Details', { title, imageSource, location, price });
+      navigation.navigate('Details', {id});
     };
     
   return (

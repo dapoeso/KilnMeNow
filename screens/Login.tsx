@@ -13,6 +13,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import axios from "axios";
 
 const StyledView = styled(View);
 const StyledTextInput = styled(TextInput);
@@ -27,9 +28,9 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
       alert("Sign in Successful!");
     } catch (error: any) {
-      console.log(error);
       alert("Sign in failed: " + error.message);
     } finally {
       setLoading(false);
@@ -43,10 +44,15 @@ const Login = () => {
         auth,
         email,
         password
-      );
+      ).then((userCredential) => {
+        console.log('Login', userCredential.user);
+        axios.post(`http://localhost:6969/users`, {
+          email: email,
+          id: userCredential.user.uid,
+        });
+      });
       alert("Successfully Registered");
     } catch (error: any) {
-      console.log(error);
       alert("Registration failed: " + error.message);
     } finally {
       setLoading(false);
