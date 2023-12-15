@@ -25,7 +25,7 @@ function HomeTabNavigator({ user }) {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Saved"
         component={SavedItemsScreen}
         options={{
@@ -33,7 +33,7 @@ function HomeTabNavigator({ user }) {
             <MaterialCommunityIcons name="heart" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Bookings"
         component={BookingsScreen}
@@ -43,7 +43,7 @@ function HomeTabNavigator({ user }) {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Messages"
         component={ChatScreen}
         options={{
@@ -51,7 +51,7 @@ function HomeTabNavigator({ user }) {
             <MaterialCommunityIcons name="chat" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
       {user ? (
         <Tab.Screen
           name="Profile"

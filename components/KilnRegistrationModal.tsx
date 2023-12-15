@@ -13,6 +13,7 @@ import axios from "axios";
 import { Address, Kiln } from "../utils/types";
 import { validateAddress } from "../utils/helpers";
 import ImageUpload from "./ImageUpload";
+import { API_URL } from "../constants/values";
 
 const KilnRegistrationModal = ({ modalVisible, setModalVisible, userId }) => {
   const [kilnDetails, setKilnDetails] = useState<Kiln>({
@@ -59,7 +60,7 @@ const KilnRegistrationModal = ({ modalVisible, setModalVisible, userId }) => {
           userId: userId,
         };
         axios
-          .post(`http://localhost:6969/address`, addressData)
+          .post(`${API_URL}/address`, addressData)
           .then((response) => {
             console.log(response?.data);
             const kilnData = {
@@ -71,7 +72,7 @@ const KilnRegistrationModal = ({ modalVisible, setModalVisible, userId }) => {
                 url: image,
             }
             axios
-              .post(`http://localhost:6969/kilns`, kilnData)
+              .post(`${API_URL}/kilns`, kilnData)
               .then((response) => {
                 console.log(response.data);
                 setModalVisible(false);

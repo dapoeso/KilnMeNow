@@ -14,8 +14,8 @@ const KilnDetails = ({route}) => {
         console.log("Fetching Data");
         const fetchData = async () => {
           try {
-            const response = await axios.get(`http://localhost:6969/kilns/${route?.params?.id}`);
-            // const response = await axios.get(`http://localhost:6969/kilns/55`);
+            const response = await axios.get(`${API_URL}/kilns/${route?.params?.id}`);
+            // const response = await axios.get(`${API_URL}/kilns/55`);
             console.log(response);
             setLoading(false);
             setKiln(response.data);

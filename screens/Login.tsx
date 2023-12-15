@@ -46,7 +46,7 @@ const Login = () => {
         password
       ).then((userCredential) => {
         console.log('Login', userCredential.user);
-        axios.post(`http://localhost:6969/users`, {
+        axios.post(`${API_URL}/users`, {
           email: email,
           id: userCredential.user.uid,
         });

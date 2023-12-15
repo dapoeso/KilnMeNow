@@ -6,9 +6,11 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState, createContext, useContext } from "react";
 import { FIREBASE_AUTH } from "./FirebaseConfig";
 import Router from "./navigation/Router";
+import { UserData } from "./utils/types";
 
 const Stack = createNativeStackNavigator();
 export const UserContext = createContext<User | null>(null);
+export const UserDataContext = createContext<UserData>(null);
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -20,8 +22,10 @@ export default function App() {
     });
   }, []);
   return (
-    <UserContext.Provider value={user}>
-      <Router user={user} />
-    </UserContext.Provider>
+    <UserDataContext.Provider value={null}>
+      <UserContext.Provider value={user}>
+        <Router user={user} />
+      </UserContext.Provider>
+    </UserDataContext.Provider>
   );
 }

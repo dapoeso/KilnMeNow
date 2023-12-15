@@ -9,12 +9,24 @@ export type Address = {
 }
 
 export type Kiln = {
+    id: number,
     name: string,
-    description: string,
-    cone: string,
-    size: string,
-    turnaround: string,
-    price: string,
+    description?: string,
+    cone?: string,
+    size?: string,
+    turnaround?: string,
+    price?: string,
+    isAvailable?: boolean,
+    requests?: Array<Request>,
+    expanded?: boolean,
+    image: string,
+}
+
+export type Request = {
+    userId: number;
+    status: string;
+    username: string;
+    reservationId: number;
 }
 
 export type Reservation = {
@@ -25,4 +37,9 @@ export type Reservation = {
     price: string, // tbd
     status: string,
     image: string
+}
+
+export type UserData = {
+    kilnIds: number[],
+    reservationIds: number[],
 }

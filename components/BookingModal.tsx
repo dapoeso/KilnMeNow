@@ -12,7 +12,7 @@ const BookingModal = ({ modalVisible, onClose, details }) => {
       ...details,
       status: "requested",
     };
-    await axios.post(`http://localhost:6969/reservation`, bookingDetails).then(response => {
+    await axios.post(`${API_URL}/reservation`, bookingDetails).then(response => {
       console.log(response);
       alert("Successfully Booked!");
       onClose();

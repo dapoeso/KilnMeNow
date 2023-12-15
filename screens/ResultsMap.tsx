@@ -29,7 +29,7 @@ const ResultsMap = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:6969/kilns");
+        const response = await axios.get("${API_URL}/kilns");
         console.log('=====================',response.data)
         setKilns(response.data);
       } catch (error) {

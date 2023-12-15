@@ -7,17 +7,20 @@ import {
   TextInput,
   StyleSheet,
   Image,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import axios from "axios";
 import ListingButton from "../components/ListingButton";
 import KilnRegistrationModal from "../components/KilnRegistrationModal";
 import Colors from "../constants/colors";
+import ViewKilnsModal from "../components/ViewKilnReservationsModal";
 
 const profilePic =
   "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
 
-function Profile({ login }) {
+const Profile = ({ login }) => {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -28,13 +31,32 @@ function Profile({ login }) {
   const [error, setError] = useState(null);
   const [editProfileVisible, setEditProfileVisible] = useState(false);
   const [registrationVisible, setRegistrationVisible] = useState(false);
+  const [viewKilnsVisible, setViewKilnsVisible] = useState(false);
+
+  const screenWidth = Dimensions.get('window').width;
+  const buttonWidth = screenWidth * 0.9;
+
+  const handleProfileUpdate = async () => {
+    try {
+      const response = await axios.patch(
+        `${API_URL}/users/${login?.email}`,
+        user
+      );
+      console.log(response);
+      setUser(response.data);
+      setEditProfileVisible(false);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  };
 
   useEffect(() => {
     console.log("Fetching Data");
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:6969/users/${login?.email}`
+          `${API_URL}/users/${login?.email}`
         );
         console.log(response.data);
         setLoading(false);
@@ -60,20 +82,6 @@ function Profile({ login }) {
     });
   };
 
-  const handleProfileUpdate = async () => {
-    try {
-      const response = await axios.patch(
-        `http://localhost:6969/users/${login?.email}`,
-        user
-      );
-      console.log(response);
-      setUser(response.data);
-      setEditProfileVisible(false);
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -82,13 +90,15 @@ function Profile({ login }) {
         <Text style={styles.name}>{user?.firstName}</Text>
       </View>
       <ListingButton onPress={() => setRegistrationVisible(true)} />
-      <Button
-        onPress={() => setEditProfileVisible(true)}
-        title="Edit Profile"
-        color={Colors.dark}
-      />
-      <Button onPress={() => {}} title="View Kilns" color={Colors.dark} />
-      <Button onPress={() => {}} title="View Addresses" color={Colors.dark} />
+      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+        <TouchableOpacity onPress={() => setEditProfileVisible(true)} style={[styles.button, { width: buttonWidth }]}>
+          <Text style={styles.buttonText}>Edit Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setViewKilnsVisible(true)} style={[styles.button, { width: buttonWidth }]}>
+          <Text style={styles.buttonText}>View Kilns</Text>
+        </TouchableOpacity>
+      </View>
+      {/* <Button onPress={() => {}} title="View Addresses" color={Colors.dark} /> */}
       <Modal visible={editProfileVisible} animationType="slide">
         <View style={styles.modal}>
           <Text style={styles.modalTitle}>Edit Profile</Text>
@@ -121,6 +131,10 @@ function Profile({ login }) {
         setModalVisible={setRegistrationVisible}
         userId={user?.id}
       />
+      <ViewKilnsModal
+        modalVisible={viewKilnsVisible}
+        setModalVisible={setViewKilnsVisible}
+       />
       <Button onPress={() => FIREBASE_AUTH.signOut()} title="Log out" color={Colors.dark} />
     </View>
   );
@@ -167,6 +181,19 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

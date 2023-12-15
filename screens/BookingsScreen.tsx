@@ -16,7 +16,7 @@ const BookingsScreen = ({ navigation }) => {
   useEffect(() => {
     const getBookingData = navigation.addListener("focus", () => {
       axios
-        .get(`http://localhost:6969/reservation/${user?.uid}`)
+        .get(`${API_URL}/reservation/${user?.uid}`)
         .then((response) => {
           console.log(response.data);
           setBookings(
